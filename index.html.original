@@ -1,0 +1,636 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NØCTURNA® | CULTURE AFTER DARK</title>
+  <meta name="description" content="NØCTURNA® - Marca de streetwear inspirada en la cultura urbana, underground, la música, el arte gráfico y la expresión individual.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/Brillo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       SECCIÓN 1: HEADER / NAVEGACIÓN
+       ============================================================ -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Logotipo NØCTURNA® -->
+      <a href="#" class="header-brand" aria-label="NØCTURNA Inicio">
+        <img src="Images/Logo.png" alt="NØCTURNA Logo" class="brand-logo-img">
+      </a>
+
+      <!-- Navegación Principal -->
+      <nav class="site-nav">
+        <ul class="nav-links" id="mainNav">
+          <li><a href="#new-drop" class="nav-link">SHOP</a></li>
+          <li><a href="#colecciones" class="nav-link">COLECCIONES</a></li>
+          <li><a href="#posters" class="nav-link">POSTERS</a></li>
+          <li><a href="#nosotros" class="nav-link">NOSOTROS</a></li>
+          <li><a href="#contacto" class="nav-link">CONTACTO</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de Cabecera -->
+      <div class="header-actions">
+        <!-- Búsqueda -->
+        <button class="action-btn" aria-label="Buscar" onclick="document.getElementById('new-drop').scrollIntoView({behavior: 'smooth'})">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Usuario -->
+        <button class="action-btn" aria-label="Cuenta de usuario" onclick="alert('Acceso a miembros NØCTURNA próximamente')">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- Carrito -->
+        <button class="action-btn cart-btn" id="cartToggleBtn" aria-label="Abrir Carrito">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-7z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+
+        <!-- Menú Móvil Hamburger -->
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir Menú">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SECCIÓN 2: HERO / BANNER PRINCIPAL
+       ============================================================ -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-container">
+      <img src="Images/Banner.jpg" alt="NØCTURNA - La Noche Siempre Nos Pertenece" class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-overlay-bottom"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-tag">STREETWEAR // CULTURE AFTER DARK</span>
+        
+        <h1 class="hero-title">
+          LA NOCHE<br>
+          <span class="highlight-always">SIEMPRE</span> NOS
+        </h1>
+
+        <!-- Imagen tipográfica original "PERTENECE" -->
+        <div class="script-pertenece-wrap">
+          <img src="Images/TEXTO-PERTENECE.png" alt="PERTENECE" class="script-pertenece-img">
+        </div>
+
+        <div class="hero-actions">
+          <a href="#new-drop" class="btn-street">EXPLORAR COLECCIÓN</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 3: NEW DROP (CARRUSEL DE 7 CAMISAS CON ROTACIÓN DE 3 VISTAS)
+       ============================================================ -->
+  <section class="new-drop-section" id="new-drop">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">NEW DROP<span class="star-icon">✦</span></h2>
+          <p class="section-subtitle">7 PIEZAS EXCLUSIVAS // VISTAS FRONTAL, ESPALDA Y MANGA // 100% HEAVY COTTON OVERSIZED</p>
+        </div>
+        <!-- Controles de navegación del carrusel -->
+        <div class="carousel-nav-controls">
+          <button class="carousel-arrow-btn" id="camisasPrevBtn" aria-label="Anterior camisa">
+            <svg viewBox="0 0 24 24" fill="none">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="carousel-arrow-btn" id="camisasNextBtn" aria-label="Siguiente camisa">
+            <svg viewBox="0 0 24 24" fill="none">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Viewport del carrusel de camisas -->
+      <div class="carousel-viewport" id="camisasViewport">
+        <div class="carousel-track">
+
+          <!-- Camisa 1 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa1/frontal.jpg" 
+                   data-back="Images/camisa1/espalda.jpg" 
+                   data-sleeve="Images/camisa1/manga.jpg">
+            <span class="product-badge">DROP 01</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa1/frontal.jpg" alt="Camiseta Nøcturna Darkness 01" class="product-img-display" loading="lazy">
+              <!-- Selectores de vista manual -->
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA DARKNESS 01" data-price="150000" data-image="Images/camisa1/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA DARKNESS 01</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+          <!-- Camisa 2 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa2/frontal.jpg" 
+                   data-back="Images/camisa2/espalda.jpg" 
+                   data-sleeve="Images/camisa2/manga.jpg">
+            <span class="product-badge">DROP 02</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa2/frontal.jpg" alt="Camiseta Nøcturna Frequency 02" class="product-img-display" loading="lazy">
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA FREQUENCY 02" data-price="150000" data-image="Images/camisa2/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA FREQUENCY 02</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+          <!-- Camisa 3 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa3/frontal.jpg" 
+                   data-back="Images/camisa3/espalda.jpg" 
+                   data-sleeve="Images/camisa3/manga.jpg">
+            <span class="product-badge">DROP 03</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa3/frontal.jpg" alt="Camiseta Nøcturna Underground 03" class="product-img-display" loading="lazy">
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA UNDERGROUND 03" data-price="150000" data-image="Images/camisa3/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA UNDERGROUND 03</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+          <!-- Camisa 4 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa4/frontal.jpg" 
+                   data-back="Images/camisa4/espalda.jpg" 
+                   data-sleeve="Images/camisa4/manga.jpg">
+            <span class="product-badge">DROP 04</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa4/frontal.jpg" alt="Camiseta Nøcturna After Dark 04" class="product-img-display" loading="lazy">
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA AFTER DARK 04" data-price="150000" data-image="Images/camisa4/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA AFTER DARK 04</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+          <!-- Camisa 5 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa5/frontal.jpg" 
+                   data-back="Images/camisa5/espalda.jpg" 
+                   data-sleeve="Images/camisa5/manga.jpg">
+            <span class="product-badge">DROP 05</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa5/frontal.jpg" alt="Camiseta Nøcturna Shadow 05" class="product-img-display" loading="lazy">
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA SHADOW 05" data-price="150000" data-image="Images/camisa5/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA SHADOW 05</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+          <!-- Camisa 6 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa6/frontal.jpg" 
+                   data-back="Images/camisa6/espalda.jpg" 
+                   data-sleeve="Images/camisa6/manga.jpg">
+            <span class="product-badge">DROP 06</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa6/frontal.jpg" alt="Camiseta Nøcturna Eclipse 06" class="product-img-display" loading="lazy">
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA ECLIPSE 06" data-price="150000" data-image="Images/camisa6/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA ECLIPSE 06</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+          <!-- Camisa 7 -->
+          <article class="product-slide-card" 
+                   data-front="Images/camisa7/frontal.jpg" 
+                   data-back="Images/camisa7/espalda.jpg" 
+                   data-sleeve="Images/camisa7/manga.jpg">
+            <span class="product-badge">DROP 07</span>
+            <span class="product-view-tag">FRONTAL</span>
+            <div class="product-media-container">
+              <img src="Images/camisa7/frontal.jpg" alt="Camiseta Nøcturna Rebel 07" class="product-img-display" loading="lazy">
+              <div class="product-views-nav">
+                <button class="view-dot-btn active" type="button">FRONTAL</button>
+                <button class="view-dot-btn" type="button">ESPALDA</button>
+                <button class="view-dot-btn" type="button">MANGA</button>
+              </div>
+              <button class="quick-add-btn" data-name="CAMISA REBEL 07" data-price="150000" data-image="Images/camisa7/frontal.jpg">
+                + AGREGAR AL CARRITO
+              </button>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">CAMISA REBEL 07</h3>
+              <span class="product-price">$150.000 COP</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 4: COLECCIONES (ENCUENTRA TU PROPIA FRECUENCIA)
+       ============================================================ -->
+  <section class="collection-section" id="colecciones">
+    <div class="container">
+      <div class="collection-banner">
+        <div class="collection-media">
+          <img src="Images/collection-model-back.jpg" alt="Modelo Nøcturna espalda streetwear" class="collection-img" loading="lazy">
+          <div class="collection-media-overlay"></div>
+        </div>
+
+        <div class="collection-content">
+          <h2 class="collection-headline">
+            ENCUENTRA TU<br>
+            PROPIA<span class="star-icon">✦</span>
+          </h2>
+
+          <!-- Imagen tipográfica original "FRECUENCIA" -->
+          <img src="Images/TEXTO-FRECUENCIA.png" alt="FRECUENCIA" class="collection-frecuencia-img">
+
+          <p class="collection-desc">
+            PRENDAS INSPIRADAS EN LA CULTURA URBANA, LA MÚSICA Y LA EXPRESIÓN INDIVIDUAL.
+          </p>
+
+          <div>
+            <a href="#new-drop" class="btn-street">EXPLORAR COLECCIÓN</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 5: POSTERS (CARRUSEL DE 12 PIEZAS DE COLECCIÓN)
+       ============================================================ -->
+  <section class="posters-section" id="posters">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">POSTERS<span class="star-icon">✦</span></h2>
+          <p class="section-subtitle">13 PIEZAS GRÁFICAS COLECCIONABLES // EDICIÓN LIMITADA STREETWEAR & MÚSICA</p>
+        </div>
+        <!-- Controles de navegación del carrusel de posters -->
+        <div class="carousel-nav-controls">
+          <button class="carousel-arrow-btn" id="postersPrevBtn" aria-label="Anterior poster">
+            <svg viewBox="0 0 24 24" fill="none">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="carousel-arrow-btn" id="postersNextBtn" aria-label="Siguiente poster">
+            <svg viewBox="0 0 24 24" fill="none">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Viewport del carrusel de posters -->
+      <div class="carousel-viewport" id="postersViewport">
+        <div class="carousel-track">
+
+          <!-- Poster 1: Poster de nocturna -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster%20de%20nocturna.jpg" data-full="Images/Posters/Poster%20de%20nocturna.jpg" alt="Poster Nøcturna Classic" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">LIMITED EDITION</span>
+              <span class="poster-title">NØCTURNA CLASSIC</span>
+            </div>
+          </div>
+
+          <!-- Poster 2: Poster de camisa de nocturna -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster%20de%20camisa%20de%20nocturna.jpg" data-full="Images/Posters/Poster%20de%20camisa%20de%20nocturna.jpg" alt="Poster Apparel Editorial" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">APPAREL ARCHIVE</span>
+              <span class="poster-title">APPAREL EDITORIAL</span>
+            </div>
+          </div>
+
+          <!-- Poster 3: Karma -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-karma.jpg" data-full="Images/Posters/Poster-karma.jpg" alt="Poster Karma" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">GRAPHIC ART</span>
+              <span class="poster-title">KARMA EDITION</span>
+            </div>
+          </div>
+
+          <!-- Poster 4: Anime -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-anime-.jpg" data-full="Images/Posters/Poster-anime-.jpg" alt="Poster Anime Underground" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">UNDERGROUND</span>
+              <span class="poster-title">ANIME CULTURE</span>
+            </div>
+          </div>
+
+          <!-- Poster 5: Ferxxo -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-ferxxo.jpg" data-full="Images/Posters/Poster-ferxxo.jpg" alt="Poster Ferxxo Urban" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">MUSIC DROP</span>
+              <span class="poster-title">FERXXO NIGHTS</span>
+            </div>
+          </div>
+
+          <!-- Poster 6: Anuel AA -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-anuel-aa.jpg" data-full="Images/Posters/Poster-anuel-aa.jpg" alt="Poster Anuel AA" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">MUSIC DROP</span>
+              <span class="poster-title">ANUEL AA EDITION</span>
+            </div>
+          </div>
+
+          <!-- Poster 7: Rauw -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-de-Rauw.jpg" data-full="Images/Posters/Poster-de-Rauw.jpg" alt="Poster Rauw" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">MUSIC DROP</span>
+              <span class="poster-title">RAUW AFTER DARK</span>
+            </div>
+          </div>
+
+          <!-- Poster 8: Ryan Castro -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-Ryan.jpg" data-full="Images/Posters/Poster-Ryan.jpg" alt="Poster Ryan" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">MEDELLÍN STREET</span>
+              <span class="poster-title">RYAN CASTRO</span>
+            </div>
+          </div>
+
+          <!-- Poster 9: Ñengo Flow Rojo -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-%C3%91engo-flow-ROJO.jpg" data-full="Images/Posters/Poster-%C3%91engo-flow-ROJO.jpg" alt="Poster Ñengo Flow Rojo" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">REAL G EDITION</span>
+              <span class="poster-title">ÑENGO FLOW RED</span>
+            </div>
+          </div>
+
+          <!-- Poster 10: Ñengo Flow Classic -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-%C3%B1engo-flow.jpg" data-full="Images/Posters/Poster-%C3%B1engo-flow.jpg" alt="Poster Ñengo Flow Classic" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">REAL G EDITION</span>
+              <span class="poster-title">ÑENGO FLOW CLASSIC</span>
+            </div>
+          </div>
+
+          <!-- Poster 10: Martin Garrix -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-martin-garrix.jpg" data-full="Images/Posters/Poster-martin-garrix.jpg" alt="Poster Martin Garrix" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">ELECTRONIC FREQUENCY</span>
+              <span class="poster-title">MARTIN GARRIX</span>
+            </div>
+          </div>
+
+          <!-- Poster 11: De La Rose -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Poster-de-la-rose.jpg" data-full="Images/Posters/Poster-de-la-rose.jpg" alt="Poster De La Rose" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">VISUAL WAVE</span>
+              <span class="poster-title">DE LA ROSE</span>
+            </div>
+          </div>
+
+          <!-- Poster 12: Regueton / Reggaeton History -->
+          <div class="poster-slide-card" title="Click para ampliar">
+            <img src="Images/Posters/optimized/Post-de-regueton.jpg" data-full="Images/Posters/Post-de-regueton.jpg" alt="Poster Reggaeton" class="poster-img" loading="lazy">
+            <div class="poster-overlay">
+              <span class="poster-tag">STREET CULTURE</span>
+              <span class="poster-title">REGGAETON CULTURE</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 6: IDENTIDAD DE MARCA / ABOUT US
+       ============================================================ -->
+  <section class="about-section" id="nosotros">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-media-col">
+          <div class="about-media">
+            <img src="Images/nocturna-brand-story.jpg" alt="Identidad Nøcturna Cultura Urbana" class="about-img" loading="lazy">
+          </div>
+          <div class="about-script-overlay">
+            <h3 class="about-title-block">MAS QUE ROPA</h3>
+            <!-- Imagen tipográfica original "ES CULTURA" -->
+            <img src="Images/TEXTO-ES-CULTURA-.png" alt="ES CULTURA" class="about-script-img">
+          </div>
+        </div>
+
+        <div class="about-content">
+          <div class="about-text">
+            <p>UNA MARCA INDEPENDIENTE QUE NACE DE LA NOCHE, EL ARTE Y LA CALLE. DISEÑAMOS PRENDAS PARA QUIENES VEN LA MODA COMO UNA FORMA DE EXPRESIÓN.</p>
+            <p>NØCTURNA nace de la conexión entre la moda, la música y la cultura urbana. Un espacio donde el arte y la expresión individual se convierten en identidad. No seguimos tendencias, construimos nuestra propia frecuencia.</p>
+          </div>
+          <div>
+            <a href="#contacto" class="btn-street">CONOCER MÁS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 7: FOOTER
+       ============================================================ -->
+  <footer class="site-footer" id="contacto">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Marca y Navegación -->
+        <div class="footer-brand-col">
+          <div class="footer-logo-wrap">
+            <img src="Images/Logo.png" alt="NØCTURNA" class="footer-logo-img">
+            <span class="star-icon">✦</span>
+          </div>
+          <p class="footer-slogan">CULTURE AFTER DARK.</p>
+          <ul class="footer-nav-simple">
+            <li><a href="#new-drop">Shop</a></li>
+            <li><a href="#colecciones">Colecciones</a></li>
+            <li><a href="#posters">Posters</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-newsletter-col">
+          <h4 class="newsletter-title">SUSCRÍBETE</h4>
+          <p class="newsletter-desc">NOVEDADES, LANZAMIENTOS Y EDICIONES ESPECIALES.</p>
+          
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="CORREO ELECTRÓNICO" required>
+            <button type="submit" class="newsletter-submit" aria-label="Suscribirse">
+              <svg viewBox="0 0 24 24" fill="none">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </form>
+          <div class="newsletter-msg" id="newsletterMsg"></div>
+        </div>
+      </div>
+
+      <!-- Barra inferior Copyright y Legal -->
+      <div class="footer-bottom">
+        <span class="copyright-text">© 2026 NØCTURNA®. ALL RIGHTS RESERVED.</span>
+        <ul class="footer-legal-links">
+          <li><a href="#">POLÍTICA DE PRIVACIDAD</a></li>
+          <li><a href="#">TÉRMINOS Y CONDICIONES</a></li>
+          <li><a href="#">ENVÍOS Y CAMBIOS</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       CARRITO LATERAL (DRAWER)
+       ============================================================ -->
+  <div class="cart-drawer-overlay" id="cartOverlay">
+    <div class="cart-drawer" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+      <div class="cart-header">
+        <h3 class="cart-title">CARRITO DE COMPRAS</h3>
+        <button class="cart-close-btn" id="cartCloseBtn" aria-label="Cerrar Carrito">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="cart-body" id="cartItemsList">
+        <div class="cart-empty-msg">Tu carrito está vacío</div>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-subtotal-row">
+          <span class="cart-subtotal-label">SUBTOTAL</span>
+          <span class="cart-subtotal-val" id="cartSubtotal">$0 COP</span>
+        </div>
+        <button class="cart-checkout-btn" id="cartCheckoutBtn">PROCEDER AL PAGO</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       LIGHTBOX MODAL (VISOR DE POSTERS)
+       ============================================================ -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar modal">&times;</button>
+      <img src="" alt="Poster NØCTURNA Ampliado" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Notificación Toast -->
+  <div class="toast-notice" id="toastNotice"></div>
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
+</body>
+</html>
