@@ -4,71 +4,71 @@ export const DEFAULT_SHIRTS = [
     badge: 'DROP 01',
     name: 'CAMISA DARKNESS 01',
     price: 150000,
-    front: '/Images/camisa1/frontal.jpg',
-    back: '/Images/camisa1/espalda.jpg',
-    sleeve: '/Images/camisa1/manga.jpg'
+    frontal: '/Images/camisa1/frontal.jpg',
+    espalda: '/Images/camisa1/espalda.jpg',
+    manga: '/Images/camisa1/manga.jpg'
   },
   {
     id: 'shirt-2',
     badge: 'DROP 02',
     name: 'CAMISA FREQUENCY 02',
     price: 150000,
-    front: '/Images/camisa2/frontal.jpg',
-    back: '/Images/camisa2/espalda.jpg',
-    sleeve: '/Images/camisa2/manga.jpg'
+    frontal: '/Images/camisa2/frontal.jpg',
+    espalda: '/Images/camisa2/espalda.jpg',
+    manga: '/Images/camisa2/manga.jpg'
   },
   {
     id: 'shirt-3',
     badge: 'DROP 03',
     name: 'CAMISA UNDERGROUND 03',
     price: 150000,
-    front: '/Images/camisa3/frontal.jpg',
-    back: '/Images/camisa3/espalda.jpg',
-    sleeve: '/Images/camisa3/manga.jpg'
+    frontal: '/Images/camisa3/frontal.jpg',
+    espalda: '/Images/camisa3/espalda.jpg',
+    manga: '/Images/camisa3/manga.jpg'
   },
   {
     id: 'shirt-4',
     badge: 'DROP 04',
     name: 'CAMISA AFTER DARK 04',
     price: 150000,
-    front: '/Images/camisa4/frontal.jpg',
-    back: '/Images/camisa4/espalda.jpg',
-    sleeve: '/Images/camisa4/manga.jpg'
+    frontal: '/Images/camisa4/frontal.jpg',
+    espalda: '/Images/camisa4/espalda.jpg',
+    manga: '/Images/camisa4/manga.jpg'
   },
   {
     id: 'shirt-5',
     badge: 'DROP 05',
     name: 'CAMISA SHADOW 05',
     price: 150000,
-    front: '/Images/camisa5/frontal.jpg',
-    back: '/Images/camisa5/espalda.jpg',
-    sleeve: '/Images/camisa5/manga.jpg'
+    frontal: '/Images/camisa5/frontal.jpg',
+    espalda: '/Images/camisa5/espalda.jpg',
+    manga: '/Images/camisa5/manga.jpg'
   },
   {
     id: 'shirt-6',
     badge: 'DROP 06',
     name: 'CAMISA ECLIPSE 06',
     price: 150000,
-    front: '/Images/camisa6/frontal.jpg',
-    back: '/Images/camisa6/espalda.jpg',
-    sleeve: '/Images/camisa6/manga.jpg'
+    frontal: '/Images/camisa6/frontal.jpg',
+    espalda: '/Images/camisa6/espalda.jpg',
+    manga: '/Images/camisa6/manga.jpg'
   },
   {
     id: 'shirt-7',
     badge: 'DROP 07',
     name: 'CAMISA REBEL 07',
     price: 150000,
-    front: '/Images/camisa7/frontal.jpg',
-    back: '/Images/camisa7/espalda.jpg',
-    sleeve: '/Images/camisa7/manga.jpg'
+    frontal: '/Images/camisa7/frontal.jpg',
+    espalda: '/Images/camisa7/espalda.jpg',
+    manga: '/Images/camisa7/manga.jpg'
   }
 ];
 
 export const DEFAULT_POSTERS = [
   {
     id: 'poster-1',
-    thumb: '/Images/Posters/optimized/Posterdenocturna.jpg',
-    full: '/Images/Posters/optimized/Posterdenocturna.jpg',
+    thumb: '/Images/Posters/optimized/Poster%20de%20nocturna.jpg',
+    full: '/Images/Posters/optimized/Poster%20de%20nocturna.jpg',
     alt: 'Poster Nøcturna Classic',
     tag: 'LIMITED EDITION',
     title: 'NØCTURNA CLASSIC'
@@ -131,16 +131,16 @@ export const DEFAULT_POSTERS = [
   },
   {
     id: 'poster-9',
-    thumb: '/Images/Posters/optimized/Posternengoflow-ROJO.jpg',
-    full: '/Images/Posters/optimized/Posternengoflow-ROJO.jpg',
+    thumb: '/Images/Posters/optimized/Poster-Nengo-flow-ROJO.jpg',
+    full: '/Images/Posters/optimized/Poster-Nengo-flow-ROJO.jpg',
     alt: 'Poster Ñengo Flow Rojo',
     tag: 'REAL G EDITION',
     title: 'ÑENGO FLOW RED'
   },
   {
     id: 'poster-10',
-    thumb: '/Images/Posters/optimized/Posternengoflow.jpg',
-    full: '/Images/Posters/optimized/Posternengoflow.jpg',
+    thumb: '/Images/Posters/optimized/Poster-nengo-flow.jpg',
+    full: '/Images/Posters/optimized/Poster-nengo-flow.jpg',
     alt: 'Poster Ñengo Flow Classic',
     tag: 'REAL G EDITION',
     title: 'ÑENGO FLOW CLASSIC'

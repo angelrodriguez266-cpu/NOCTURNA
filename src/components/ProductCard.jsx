@@ -1,25 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart, formatCOP } from '../context/CartContext';
 
-export default function ProductCard({ item }) {
+export default function ProductCard({
+  item = {},
+  images = [
+    item.frontal || item.front,
+    item.espalda || item.back,
+    item.manga || item.sleeve,
+  ],
+}) {
   const { addToCart } = useCart();
-  const [currentViewIndex, setCurrentViewIndex] = useState(0);
+
+  // 1. Manejo de Estado (0 = Frontal, 1 = Espalda, 2 = Manga)
+  const [viewIndex, setViewIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const views = [
-    item.front || item.image_url,
-    item.back || item.front || item.image_url,
-    item.sleeve || item.front || item.image_url,
-  ];
   const viewNames = ['FRONTAL', 'ESPALDA', 'MANGA'];
 
-  // Auto ciclo cada 3.2s mientras no esté en hover
+  // Asegurar que siempre tengamos un array válido de 3 vistas
+  const resolvedImages = images && images.length > 0
+    ? images
+    : [
+        item.frontal || item.front,
+        item.espalda || item.back,
+        item.manga || item.sleeve,
+      ];
+
+  // 2. Ciclo Automático (Autoplay) cada 2.5 segundos si no está en hover
   useEffect(() => {
     if (isHovered) return;
 
     const interval = setInterval(() => {
-      setCurrentViewIndex((prev) => (prev + 1) % 3);
-    }, 3200);
+      setViewIndex((prev) => (prev + 1) % 3);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, [isHovered]);
@@ -29,37 +42,41 @@ export default function ProductCard({ item }) {
     addToCart({
       name: item.name || item.title || 'CAMISA NØCTURNA',
       price: item.price ? Number(item.price) : 150000,
-      image: views[currentViewIndex] || views[0],
+      image: resolvedImages[viewIndex] || resolvedImages[0],
     });
   };
 
   return (
+    // 3. Pausa al Hover: eventos onMouseEnter y onMouseLeave en el contenedor
     <article
       className="product-slide-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <span className="product-badge">{item.badge || item.tag || 'DROP'}</span>
-      <span className="product-view-tag">{viewNames[currentViewIndex]}</span>
+      <span className="product-view-tag">{viewNames[viewIndex]}</span>
 
       <div className="product-media-container">
+        {/* 4. La imagen principal muestra images[viewIndex] */}
         <img
-          src={views[currentViewIndex]}
-          alt={item.name || item.title || 'Camiseta Nøcturna'}
+          key={`${item.id || item.name}-${viewIndex}`}
+          src={resolvedImages[viewIndex] || resolvedImages[0]}
+          alt={`${item.name || item.title || 'Camiseta Nøcturna'} - ${viewNames[viewIndex]}`}
           className="product-img-display"
           loading="lazy"
         />
 
-        {/* Selectores de vista manual */}
+        {/* 5. Cambio Manual: onMouseEnter en cada botón fuerza el cambio inmediato */}
         <div className="product-views-nav">
           {viewNames.map((name, idx) => (
             <button
               key={name}
               type="button"
-              className={`view-dot-btn ${currentViewIndex === idx ? 'active' : ''}`}
+              className={`view-dot-btn ${viewIndex === idx ? 'active' : ''}`}
+              onMouseEnter={() => setViewIndex(idx)}
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentViewIndex(idx);
+                setViewIndex(idx);
               }}
             >
               {name}

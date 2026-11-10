@@ -29,17 +29,35 @@ export default function DropCarousel() {
         }
 
         if (data && data.length > 0) {
-          // Si hay imágenes en Supabase para el carrusel de camisas
-          // Mapeamos los datos dinámicos a la estructura de la tarjeta
-          const dynamicShirts = data.map((item, index) => ({
-            id: item.id,
-            badge: item.tag || `DROP 0${(index % 9) + 1}`,
-            name: item.title || `CAMISA NØCTURNA 0${index + 1}`,
-            price: item.price ? Number(item.price) : 150000,
-            front: item.image_url,
-            back: item.image_url,
-            sleeve: item.image_url,
-          }));
+          // Ordenar por tag (DROP 01, DROP 02, ...)
+          const sortedData = [...data].sort((a, b) => (a.tag || '').localeCompare(b.tag || ''));
+
+          const dynamicShirts = sortedData.map((item, index) => {
+            const defaultShirt = DEFAULT_SHIRTS.find((s) => s.badge === item.tag) || DEFAULT_SHIRTS[index] || {};
+
+            // Si la URL viene de Supabase Storage con el patrón front_frontal.jpg,
+            // derivamos las vistas back_espalda y sleeve_manga que fueron subidas al bucket.
+            const isSupabaseStorageUrl = item.image_url?.includes('front_frontal.jpg');
+
+            const frontalUrl = item.image_url || defaultShirt.frontal;
+            const espaldaUrl = isSupabaseStorageUrl
+              ? item.image_url.replace('front_frontal.jpg', 'back_espalda.jpg')
+              : (defaultShirt.espalda || item.image_url);
+            const mangaUrl = isSupabaseStorageUrl
+              ? item.image_url.replace('front_frontal.jpg', 'sleeve_manga.jpg')
+              : (defaultShirt.manga || item.image_url);
+
+            return {
+              id: item.id,
+              badge: item.tag || `DROP 0${(index % 9) + 1}`,
+              name: item.title || defaultShirt.name || `CAMISA NØCTURNA 0${index + 1}`,
+              price: item.price ? Number(item.price) : (defaultShirt.price || 150000),
+              frontal: frontalUrl,
+              espalda: espaldaUrl,
+              manga: mangaUrl,
+            };
+          });
+
           setShirts(dynamicShirts);
         }
       } catch (err) {
@@ -106,7 +124,11 @@ export default function DropCarousel() {
         <div className="carousel-viewport" id="camisasViewport" ref={viewportRef}>
           <div className="carousel-track">
             {shirts.map((shirt) => (
-              <ProductCard key={shirt.id} item={shirt} />
+              <ProductCard
+                key={shirt.id}
+                item={shirt}
+                images={[shirt.frontal, shirt.espalda, shirt.manga]}
+              />
             ))}
           </div>
         </div>
