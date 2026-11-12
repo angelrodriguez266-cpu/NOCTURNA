@@ -22,6 +22,7 @@ export default function Home() {
       '.collection-banner', '.about-grid'
     ].join(',');
     const observed = new WeakSet();
+    const progressBar = document.querySelector('.scroll-progress-indicator');
     const revealObserver = 'IntersectionObserver' in window
       ? new IntersectionObserver((entries, observer) => {
           entries.forEach((entry) => {
@@ -38,7 +39,7 @@ export default function Home() {
         if (observed.has(element)) return;
         observed.add(element);
         element.classList.add('motion-reveal');
-        element.style.setProperty('--motion-delay', `${Math.min(index % 5, 4) * 90}ms`);
+        element.style.setProperty('--motion-delay', `${Math.min(index % 4, 3) * 45}ms`);
         if (revealObserver) revealObserver.observe(element);
         else element.classList.add('is-visible');
       });
@@ -61,8 +62,7 @@ export default function Home() {
         const scrollable = document.documentElement.scrollHeight - window.innerHeight;
         const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
         root.style.setProperty('--scroll-progress', `${progress * 100}%`);
-        const bar = document.querySelector('.scroll-progress-indicator');
-        if (bar) bar.style.transform = `scaleX(${progress})`;
+        if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
         ticking = false;
       });
     };
