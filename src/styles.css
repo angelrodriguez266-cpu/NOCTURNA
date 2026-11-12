@@ -1687,3 +1687,112 @@ html::before {
 }
 
 
+
+
+/* ============================================================
+   CINEMATIC MOTION — NØCTURNA
+   GPU-friendly transforms, restrained atmosphere, accessible motion
+   ============================================================ */
+
+/* Slow camera push on the actual hero video (the image fallback keeps its own intro). */
+.hero-bg-video {
+  animation: nocturna-video-push 22s ease-in-out infinite alternate;
+  transform-origin: 54% 48%;
+}
+@keyframes nocturna-video-push {
+  from { transform: scale(1); }
+  to { transform: scale(1.065); }
+}
+
+/* Editorial frame and light sweep in the hero. */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  opacity: .34;
+  background:
+    linear-gradient(115deg, transparent 0 46%, rgba(231,62,61,.12) 49%, transparent 52% 100%),
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(255,255,255,.018) 6px);
+  mix-blend-mode: screen;
+}
+.hero-tag::before {
+  transform-origin: left center;
+  animation: nocturna-line-grow 900ms var(--motion-ease) 180ms both;
+}
+@keyframes nocturna-line-grow {
+  from { transform: scaleX(0); opacity: .3; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+/* Headings enter with a compact editorial wipe. */
+.section-head .section-title {
+  animation: nocturna-heading-in 800ms var(--motion-ease) both;
+}
+@keyframes nocturna-heading-in {
+  from { opacity: .35; transform: translate3d(0, 16px, 0); clip-path: inset(0 0 35% 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); clip-path: inset(0 0 0 0); }
+}
+
+/* Cards respond like tactile printed objects without costly blur/filter loops. */
+.product-slide-card, .poster-slide-card {
+  backface-visibility: hidden;
+  transition:
+    transform 650ms var(--motion-ease),
+    border-color 350ms ease,
+    box-shadow 500ms var(--motion-ease);
+}
+.product-slide-card:focus-within, .poster-slide-card:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.poster-overlay { transition: opacity 450ms ease, transform 650ms var(--motion-ease); }
+.poster-slide-card:hover .poster-overlay { transform: translate3d(0, -5px, 0); }
+
+/* Collection and about imagery get a slow, subtle camera movement. */
+.collection-img, .about-img { will-change: transform; }
+.collection-media, .about-media { overflow: hidden; }
+.collection-media::after, .about-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, transparent 45%, rgba(231,62,61,.12) 100%);
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+.collection-banner:hover .collection-media::after,
+.about-media:hover::after { opacity: 1; }
+
+/* More legible interaction feedback for keyboard and touch users. */
+.nav-link:focus-visible, .btn-street:focus-visible,
+.action-btn:focus-visible, .carousel-arrow-btn:focus-visible,
+.mobile-menu-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.btn-street:active, .carousel-arrow-btn:active { transform: scale(.97); }
+
+@media (hover: none) {
+  .product-views-nav { opacity: 1; }
+  .quick-add-btn { transform: translateY(0); opacity: 1; }
+}
+@media (max-width: 768px) {
+  .hero-bg-video { animation-duration: 30s; }
+  .hero-section::after { opacity: .2; }
+  .product-slide-card, .poster-slide-card { will-change: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-video, .hero-bg-img, .hero-overlay,
+  .hero-content > *, .hero-title, .script-pertenece-img,
+  .hero-tag::before, .section-head .section-title {
+    animation: none !important;
+    clip-path: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .hero-section::after { display: none; }
+  .product-slide-card, .poster-slide-card,
+  .collection-img, .about-img { will-change: auto; }
+}
