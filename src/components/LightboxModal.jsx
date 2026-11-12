@@ -1,33 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLightbox } from '../context/LightboxContext';
+
+const LENS_SIZE = 190;
 
 export default function LightboxModal() {
   const { isOpen, imageSrc, caption, closeLightbox } = useLightbox();
-  const [zoom, setZoom] = useState(1);
+  const imageRef = useRef(null);
+  const viewportRef = useRef(null);
+  const [lens, setLens] = useState({ x: 0, y: 0, visible: false, bgX: 0, bgY: 0, bgWidth: 0, bgHeight: 0 });
+  const [magnification, setMagnification] = useState(2.5);
 
   useEffect(() => {
-    setZoom(1);
+    setLens((current) => ({ ...current, visible: false }));
+    setMagnification(2.5);
   }, [imageSrc, isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === '+' || e.key === '=') setZoom((current) => Math.min(4, current + 0.25));
-      if (e.key === '-') setZoom((current) => Math.max(1, current - 0.25));
-      if (e.key === '0') setZoom(1);
+      if (e.key === '+' || e.key === '=') setMagnification((value) => Math.min(5, Number((value + 0.25).toFixed(2))));
+      if (e.key === '-') setMagnification((value) => Math.max(1.5, Number((value - 0.25).toFixed(2))));
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, closeLightbox]);
 
-  const zoomIn = () => setZoom((current) => Math.min(4, Number((current + 0.25).toFixed(2))));
-  const zoomOut = () => setZoom((current) => Math.max(1, Number((current - 0.25).toFixed(2))));
+  const updateLens = (event) => {
+    const image = imageRef.current;
+    const viewport = viewportRef.current;
+    if (!image || !viewport) return;
+    const imageRect = image.getBoundingClientRect();
+    const viewportRect = viewport.getBoundingClientRect();
+    const pointerX = event.clientX;
+    const pointerY = event.clientY;
 
-  const handleWheel = (e) => {
-    e.preventDefault();
-    if (e.deltaY < 0) zoomIn();
-    else zoomOut();
+    if (pointerX < imageRect.left || pointerX > imageRect.right || pointerY < imageRect.top || pointerY > imageRect.bottom) {
+      setLens((current) => ({ ...current, visible: false }));
+      return;
+    }
+
+    const localX = pointerX - imageRect.left;
+    const localY = pointerY - imageRect.top;
+    setLens({
+      x: pointerX - viewportRect.left,
+      y: pointerY - viewportRect.top,
+      bgX: -(localX * magnification) + LENS_SIZE / 2,
+      bgY: -(localY * magnification) + LENS_SIZE / 2,
+      bgWidth: imageRect.width * magnification,
+      bgHeight: imageRect.height * magnification,
+      visible: true,
+    });
+  };
+
+  const handleWheel = (event) => {
+    event.preventDefault();
+    setMagnification((value) => {
+      const next = event.deltaY < 0 ? value + 0.25 : value - 0.25;
+      return Math.min(5, Math.max(1.5, Number(next.toFixed(2))));
+    });
+    requestAnimationFrame(() => updateLens(event));
   };
 
   if (!isOpen) return null;
@@ -42,39 +74,55 @@ export default function LightboxModal() {
       onClick={(e) => {
         if (e.target.id === 'lightboxModal') closeLightbox();
       }}
-      onWheel={handleWheel}
     >
       <div className="lightbox-content">
-        <button
-          className="lightbox-close"
-          id="lightboxClose"
-          aria-label="Cerrar modal"
-          onClick={closeLightbox}
-        >
+        <button className="lightbox-close" id="lightboxClose" aria-label="Cerrar modal" onClick={closeLightbox}>
           &times;
         </button>
 
-        <div className="lightbox-zoom-controls" aria-label="Controles de zoom">
-          <button type="button" onClick={zoomOut} disabled={zoom <= 1} aria-label="Alejar">−</button>
-          <span>{Math.round(zoom * 100)}%</span>
-          <button type="button" onClick={zoomIn} disabled={zoom >= 4} aria-label="Acercar">+</button>
-          <button type="button" onClick={() => setZoom(1)} disabled={zoom === 1} aria-label="Restablecer zoom">RESET</button>
+        <div className="lightbox-zoom-controls" aria-label="Aumento de la lupa">
+          <span>LUPA</span>
+          <button type="button" onClick={() => setMagnification((value) => Math.max(1.5, Number((value - 0.25).toFixed(2))))} disabled={magnification <= 1.5} aria-label="Reducir aumento">−</button>
+          <strong>{magnification.toFixed(2)}×</strong>
+          <button type="button" onClick={() => setMagnification((value) => Math.min(5, Number((value + 0.25).toFixed(2))))} disabled={magnification >= 5} aria-label="Aumentar lupa">+</button>
+          <button type="button" onClick={() => setMagnification(2.5)}>RESET</button>
         </div>
 
-        <div className="lightbox-image-viewport">
+        <div
+          className="lightbox-image-viewport"
+          ref={viewportRef}
+          onPointerMove={updateLens}
+          onPointerLeave={() => setLens((current) => ({ ...current, visible: false }))}
+          onPointerDown={updateLens}
+          onWheel={handleWheel}
+        >
           <img
+            ref={imageRef}
             src={imageSrc}
             alt={caption || 'Poster NØCTURNA Ampliado'}
             className="lightbox-img"
             id="lightboxImg"
-            style={{ transform: `scale(${zoom})` }}
             draggable="false"
           />
+          <div
+            className={`lightbox-magnifier${lens.visible ? ' is-visible' : ''}`}
+            aria-hidden="true"
+            style={{
+              left: lens.x,
+              top: lens.y,
+              width: LENS_SIZE,
+              height: LENS_SIZE,
+              backgroundImage: `url("${imageSrc}")`,
+              backgroundSize: `${lens.bgWidth}px ${lens.bgHeight}px`,
+              backgroundPosition: `${lens.bgX}px ${lens.bgY}px`,
+            }}
+          >
+            <span className="lightbox-magnifier-crosshair" />
+          </div>
         </div>
-        <div className="lightbox-caption" id="lightboxCaption">
-          {caption}
-        </div>
-        <div className="lightbox-hint">USA + / − O LA RUEDA DEL RATÓN PARA HACER ZOOM · 0 PARA RESTABLECER</div>
+
+        <div className="lightbox-caption" id="lightboxCaption">{caption}</div>
+        <div className="lightbox-hint">MUEVE EL CURSOR O EL DEDO SOBRE EL POSTER PARA EXPLORAR LOS DETALLES</div>
       </div>
     </div>
   );
