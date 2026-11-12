@@ -1291,14 +1291,16 @@ button, input {
 }
 
 .lightbox-image-viewport {
+  position: relative;
   width: 100%;
   max-height: 78vh;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   overscroll-behavior: contain;
-  scrollbar-color: var(--color-accent) #171717;
+  cursor: crosshair;
+  touch-action: pan-y;
 }
 
 .lightbox-img {
@@ -1309,9 +1311,57 @@ button, input {
   height: auto;
   object-fit: contain;
   border: 1px solid var(--color-border);
-  transform-origin: center center;
-  transition: transform 160ms ease;
   user-select: none;
+  pointer-events: none;
+}
+
+.lightbox-magnifier {
+  position: absolute;
+  z-index: 3;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.75), 0 8px 28px rgba(0,0,0,0.65);
+  background-repeat: no-repeat;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.82);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.lightbox-magnifier.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.lightbox-magnifier-crosshair {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lightbox-magnifier-crosshair::before,
+.lightbox-magnifier-crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.7);
+}
+
+.lightbox-magnifier-crosshair::before {
+  width: 1px;
+  height: 22px;
+  left: 5px;
+  top: -6px;
+}
+
+.lightbox-magnifier-crosshair::after {
+  height: 1px;
+  width: 22px;
+  top: 5px;
+  left: -6px;
 }
 
 .lightbox-zoom-controls {
