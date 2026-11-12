@@ -1852,3 +1852,38 @@ body::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
+
+/* FLUIDITY PASS — lighter scroll reveals and fewer forced GPU layers */
+.motion-enabled .motion-reveal {
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 620ms cubic-bezier(.22,.7,.25,1), transform 620ms cubic-bezier(.22,.7,.25,1);
+  will-change: auto;
+}
+.motion-enabled .product-slide-card.motion-reveal {
+  transform: translate3d(0, 30px, 0) scale(.985);
+}
+.motion-enabled .product-slide-card.motion-reveal.is-visible {
+  transform: translate3d(0,0,0) scale(1);
+}
+.motion-enabled .poster-slide-card.motion-reveal {
+  transform: translate3d(0, 26px, 0) rotate(.4deg);
+}
+.motion-enabled .poster-slide-card.motion-reveal.is-visible {
+  transform: translate3d(0,0,0) rotate(0);
+}
+.motion-enabled .collection-media .collection-img,
+.motion-enabled .about-media .about-img {
+  will-change: auto;
+  transition: transform 850ms cubic-bezier(.22,.7,.25,1);
+}
+.motion-enabled .hero-bg-video { animation-duration: 26s; }
+@media (max-width: 768px) {
+  .motion-enabled .motion-reveal,
+  .motion-enabled .product-slide-card.motion-reveal,
+  .motion-enabled .poster-slide-card.motion-reveal {
+    transform: translate3d(0, 16px, 0);
+    transition-duration: 480ms;
+    transition-delay: 0ms !important;
+  }
+}
