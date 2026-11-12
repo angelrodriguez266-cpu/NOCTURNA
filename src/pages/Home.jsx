@@ -18,10 +18,13 @@ export default function Home() {
     const revealSelector = [
       '.section-head', '.product-slide-card', '.collection-media',
       '.collection-content', '.poster-slide-card', '.about-media-col',
-      '.about-content', '.footer-top > div', '.footer-bottom'
+      '.about-content', '.footer-top > div', '.footer-bottom',
+      '.collection-banner', '.about-grid'
     ].join(',');
 
     const observed = new WeakSet();
+    if (!('IntersectionObserver' in window)) return undefined;
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
