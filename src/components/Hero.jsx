@@ -1,6 +1,28 @@
 import React from 'react';
 
 export default function Hero() {
+  const videoRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    // Pausar el video cuando el usuario baja en la página para liberar decodificación de GPU
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoEl.play().catch(() => {});
+        } else {
+          videoEl.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(videoEl);
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToDrop = (e) => {
     e.preventDefault();
     const elem = document.getElementById('new-drop');
@@ -11,6 +33,7 @@ export default function Hero() {
     <section className="hero-section" id="hero">
       <div className="hero-bg-container">
         <video
+          ref={videoRef}
           className="hero-bg-video"
           autoPlay
           muted

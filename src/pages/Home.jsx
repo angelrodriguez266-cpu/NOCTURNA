@@ -53,10 +53,17 @@ export default function Home() {
     const main = document.querySelector('main');
     if (main) mutationObserver.observe(main, { childList: true, subtree: true });
 
+    let ticking = false;
     const updateScrollProgress = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
-      document.documentElement.style.setProperty('--scroll-progress', `${progress * 100}%`);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+          document.documentElement.style.setProperty('--scroll-progress', `${progress * 100}%`);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     updateScrollProgress();
     window.addEventListener('scroll', updateScrollProgress, { passive: true });

@@ -344,8 +344,7 @@ button, input {
   object-position: center;
   filter: contrast(1.08) brightness(0.9);
   z-index: 1;
-  animation: nocturna-hero-drift 18s ease-in-out infinite alternate;
-  transform-origin: center center;
+  will-change: transform;
 }
 
 @keyframes nocturna-hero-drift {
@@ -1477,16 +1476,14 @@ html::before {
 /* Scroll-triggered entrance. Elements are only hidden after JS enhancement. */
 .motion-reveal {
   opacity: 0;
-  transform: translate3d(0, 34px, 0);
-  filter: blur(5px);
-  transition: opacity 760ms var(--motion-ease), transform 760ms var(--motion-ease), filter 760ms var(--motion-ease);
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 500ms var(--motion-ease), transform 500ms var(--motion-ease);
   transition-delay: var(--motion-delay, 0ms);
-  will-change: opacity, transform, filter;
+  will-change: opacity, transform;
 }
 .motion-reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  filter: blur(0);
 }
 .product-slide-card.motion-reveal { transform: translate3d(0, 42px, 0) scale(.975); }
 .product-slide-card.motion-reveal.is-visible { transform: translate3d(0, 0, 0) scale(1); }
@@ -1512,7 +1509,12 @@ html::before {
 }
 .culture-marquee::before { left: 0; background: linear-gradient(90deg, var(--color-bg), transparent); }
 .culture-marquee::after { right: 0; background: linear-gradient(270deg, var(--color-bg), transparent); }
-.culture-marquee-track { display: flex; width: max-content; animation: nocturna-marquee 34s linear infinite; }
+.culture-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: nocturna-marquee 34s linear infinite;
+  will-change: transform;
+}
 .culture-marquee-group { display: flex; align-items: center; gap: clamp(20px, 3vw, 48px); padding-right: clamp(20px, 3vw, 48px); white-space: nowrap; }
 .culture-marquee span { font-family: var(--font-mono); font-size: clamp(.64rem, 1vw, .78rem); font-weight: 600; letter-spacing: .2em; color: rgba(232, 229, 223, .72); }
 .culture-marquee i { color: var(--color-accent); font-size: 1.05rem; font-style: normal; }
@@ -1547,7 +1549,7 @@ html::before {
 @media (max-width: 640px) {
   .culture-marquee { padding: 10px 0 8px; }
   .culture-marquee-track { animation-duration: 27s; }
-  .motion-reveal { transform: translate3d(0, 22px, 0); filter: blur(2px); }
+  .motion-reveal { transform: translate3d(0, 16px, 0); }
 }
 
 

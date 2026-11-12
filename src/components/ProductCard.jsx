@@ -10,6 +10,8 @@ export default function ProductCard({
   ],
 }) {
   const { addToCart } = useCart();
+  const cardRef = React.useRef(null);
+  const [isInViewport, setIsInViewport] = useState(false);
 
   // 1. Manejo de Estado (0 = Frontal, 1 = Espalda, 2 = Manga)
   const [viewIndex, setViewIndex] = useState(0);
@@ -26,16 +28,32 @@ export default function ProductCard({
         item.manga || item.sleeve,
       ];
 
-  // 2. Ciclo Automático (Autoplay) cada 2.5 segundos si no está en hover
+  // Observar si la tarjeta está visible en pantalla para no gastar timers/re-renders si está fuera
   useEffect(() => {
-    if (isHovered) return;
+    const el = cardRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // 2. Ciclo Automático solo cuando está visible y no está en hover
+  useEffect(() => {
+    if (isHovered || !isInViewport) return;
 
     const interval = setInterval(() => {
       setViewIndex((prev) => (prev + 1) % 3);
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, isInViewport]);
 
   const handleQuickAdd = (e) => {
     e.stopPropagation();
@@ -49,6 +67,7 @@ export default function ProductCard({
   return (
     // 3. Pausa al Hover: eventos onMouseEnter y onMouseLeave en el contenedor
     <article
+      ref={cardRef}
       className="product-slide-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
