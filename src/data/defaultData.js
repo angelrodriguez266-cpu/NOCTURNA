@@ -66,6 +66,14 @@ export const DEFAULT_SHIRTS = [
 
 export const DEFAULT_POSTERS = [
   {
+    id: 'poster-monday-local',
+    thumb: '/Images/Posters/optimized/Poster-Monday.webp',
+    full: '/Images/Posters/optimized/Poster-Monday.webp',
+    alt: 'Poster Monday W Sound',
+    tag: 'MUSIC DROP',
+    title: 'MONDAY W SOUND'
+  },
+  {
     id: 'poster-1',
     thumb: '/Images/Posters/optimized/Poster%20de%20nocturna.jpg',
     full: '/Images/Posters/optimized/Poster%20de%20nocturna.jpg',
