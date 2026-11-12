@@ -30,14 +30,30 @@ export default function PostersCarousel() {
         }
 
         if (data && data.length > 0) {
-          const dynamicPosters = data.map((item, index) => ({
-            id: item.id,
-            thumb: item.image_url,
-            full: item.image_url,
-            alt: item.title || `Poster Nøcturna ${index + 1}`,
-            tag: item.tag || 'LIMITED EDITION',
-            title: item.title || `POSTER NØCTURNA 0${index + 1}`,
-          }));
+          const mondayPosterPath = '/Images/Posters/optimized/Poster-Monday.webp';
+          const dynamicPosters = data.map((item, index) => {
+            const isMonday = `${item.title || ''} ${item.tag || ''}`.toLowerCase().includes('monday');
+            return {
+              id: item.id,
+              thumb: isMonday ? mondayPosterPath : item.image_url,
+              full: isMonday ? mondayPosterPath : item.image_url,
+              alt: item.title || `Poster Nøcturna ${index + 1}`,
+              tag: item.tag || 'LIMITED EDITION',
+              title: item.title || `POSTER NØCTURNA 0${index + 1}`,
+            };
+          });
+
+          if (!dynamicPosters.some((poster) => poster.thumb === mondayPosterPath)) {
+            dynamicPosters.push({
+              id: 'poster-monday-local',
+              thumb: mondayPosterPath,
+              full: mondayPosterPath,
+              alt: 'Poster Monday W Sound',
+              tag: 'MUSIC DROP',
+              title: 'MONDAY W SOUND',
+            });
+          }
+
           setPosters(dynamicPosters);
         }
       } catch (err) {
