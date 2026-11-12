@@ -103,9 +103,9 @@ export default function PostersCarousel() {
         {/* Viewport del carrusel de posters */}
         <div className="carousel-viewport" id="postersViewport" ref={viewportRef}>
           <div className="carousel-track">
-            {posters.map((poster) => (
+            {posters.map((poster, idx) => (
               <div
-                key={poster.id}
+                key={poster.id || idx}
                 className="poster-slide-card"
                 title="Click para ampliar"
                 onClick={() => openLightbox(poster.full || poster.thumb, poster.title)}
@@ -115,6 +115,7 @@ export default function PostersCarousel() {
                   alt={poster.alt || poster.title}
                   className="poster-img"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="poster-overlay">
                   <span className="poster-tag">{poster.tag}</span>
