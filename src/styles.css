@@ -1281,18 +1281,78 @@ button, input {
 
 .lightbox-content {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+  width: min(92vw, 1100px);
+  max-width: 92vw;
+  max-height: 94vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.75rem;
+}
+
+.lightbox-image-viewport {
+  width: 100%;
+  max-height: 78vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--color-accent) #171717;
 }
 
 .lightbox-img {
+  display: block;
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
   border: 1px solid var(--color-border);
+  transform-origin: center center;
+  transition: transform 160ms ease;
+  user-select: none;
+}
+
+.lightbox-zoom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.lightbox-zoom-controls button {
+  min-width: 36px;
+  height: 34px;
+  padding: 0 0.65rem;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: #171717;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.lightbox-zoom-controls button:hover:not(:disabled) {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.lightbox-zoom-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.lightbox-hint {
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-align: center;
 }
 
 .lightbox-caption {
